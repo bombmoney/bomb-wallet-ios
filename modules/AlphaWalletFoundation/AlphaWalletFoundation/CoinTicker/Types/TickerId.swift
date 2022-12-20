@@ -70,6 +70,7 @@ extension RPCServer {
         case "ethereum": self = .main
         case "ethereum-classic": self = .classic
         case "xdai": self = .xDai
+        case "bomb": self = .binance_smart_chain
         case "binance-smart-chain": self = .binance_smart_chain
         case "avalanche": self = .avalanche
         case "polygon-pos": self = .polygon

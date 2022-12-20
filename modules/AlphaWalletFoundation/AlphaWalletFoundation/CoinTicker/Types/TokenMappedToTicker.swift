@@ -24,6 +24,10 @@ public struct TokenMappedToTicker {
             return "fantom"
         } else if server == .binance_smart_chain && contractAddress == Constants.nativeCryptoAddressInDatabase {
             return "binancecoin"
+        } else if server == .bomb && contractAddress == Constants.nativeCryptoAddressInDatabase {
+            return "bomb-money"
+        } else if server == .bomb && contractAddress == Constants.bombchainBtcb {
+            return "binance-bitcoin"
         } else if server == .klaytnCypress && contractAddress == Constants.nativeCryptoAddressInDatabase {
             return "klay-token"
         } else if server == .xDai && contractAddress == Constants.nativeCryptoAddressInDatabase {

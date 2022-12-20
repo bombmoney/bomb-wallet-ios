@@ -43,6 +43,7 @@ public struct Constants {
     // Magic link networks
     public static let legacyMagicLinkPrefix = "https://app.awallet.io/"
 
+        
     // fee master
     static let paymentServerBaseUrl = URL(string: "https://paymaster.stormbird.sg")!
 
@@ -50,6 +51,7 @@ public struct Constants {
     public static let nullTokenId = "0x0000000000000000000000000000000000000000000000000000000000000000"
     public static let nullTokenIdBigUInt = BigUInt(0)
     public static let burnAddressString = "0x000000000000000000000000000000000000dEaD"
+   public static let bombchainBtcb = AlphaWallet.Address(string: "0x140F62aCCC69cb24eABdC0E00b7caaC577cA5b24")!
     public static let nullAddress = AlphaWallet.Address(uncheckedAgainstNullAddress: "0x0000000000000000000000000000000000000000")!
     public static let nativeCryptoAddressInDatabase = nullAddress
 
