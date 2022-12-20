@@ -10,8 +10,8 @@ import AlphaWalletFoundation
 
 struct InitialNetworkSelectionCollectionModel {
 
-    static let defaultMainnetServers: Set<RPCServer> = [.main, .xDai, .polygon]
-    static let defaultTestnetServers: Set<RPCServer> = [.goerli]
+    static let defaultMainnetServers: Set<RPCServer> = [.bomb]
+    static let defaultTestnetServers: Set<RPCServer> = []
 
     // MARK: - enums
 

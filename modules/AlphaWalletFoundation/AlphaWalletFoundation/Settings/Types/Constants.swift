@@ -6,38 +6,39 @@ import BigInt
 public struct Constants {
     static let xdaiDropPrefix = Data(bytes: [0x58, 0x44, 0x41, 0x49, 0x44, 0x52, 0x4F, 0x50]).hex()
     
-    static let mainnetMagicLinkHost = "aw.app"
-    static let legacyMagicLinkHost = "app.awallet.io"
-    static let classicMagicLinkHost = "classic.aw.app"
-    static let callistoMagicLinkHost = "callisto.aw.app"
-    static let poaMagicLinkHost = "poa.aw.app"
-    static let xDaiMagicLinkHost = "xdai.aw.app"
-    static let goerliMagicLinkHost = "goerli.aw.app"
-    static let artisSigma1MagicLinkHost = "artis_sigma1.aw.app"
-    static let artisTau1MagicLinkHost = "artis_tau1.aw.app"
-    static let binanceMagicLinkHost = "binance.aw.app"
-    static let binanceTestMagicLinkHost = "test-binance.aw.app"
-    static let hecoMagicLinkHost = "heco.aw.app"
-    static let hecoTestMagicLinkHost = "test-heco.aw.app"
-    static let customMagicLinkHost = "custom.aw.app"
-    static let fantomMagicLinkHost = "fantom.aw.app"
-    static let fantomTestMagicLinkHost = "test-fantom.aw.app"
-    static let avalancheMagicLinkHost = "avalanche.aw.app"
-    static let avalancheTestMagicLinkHost = "test-avalanche.aw.app"
-    static let maticMagicLinkHost = "polygon.aw.app"
-    static let mumbaiTestMagicLinkHost = "test-polygon.aw.app"
-    static let optimisticMagicLinkHost = "optimistic.aw.app"
-    static let cronosMagicLinkHost = "cronos.aw.app"
-    static let cronosTestMagicLinkHost = "test-cronos.aw.app"
-    static let arbitrumMagicLinkHost = "arbitrum.aw.app"
-    static let palmMagicLinkHost = "palm.aw.app"
-    static let palmTestnetMagicLinkHost = "palmTestnet.aw.app"
-    static let klaytnCypressMagicLinkHost = "klaytnCypress.aw.app"
-    static let klaytnBaobabTestnetMagicLinkHost = "klaytnBaobabTestnet.aw.app"
-    static let ioTeXMagicLinkHost = "ioTeX.aw.app"
-    static let ioTeXTestnetMagicLinkHost = "ioTeXTestnet.aw.app"
-    static let optimismGoerliMagicLinkHost = "optimismGoerli.aw.app"
-    static let arbitrumGoerliMagicLinkHost = "arbitrumGoerli.aw.app"
+    static let bombMagicLinkHost = "bomb.app"
+    static let mainnetMagicLinkHost = "eth.bomb.app"
+    static let legacyMagicLinkHost = "legacy.bomb.app"
+    static let classicMagicLinkHost = "classic.bomb.app"
+    static let callistoMagicLinkHost = "callisto.bomb.app"
+    static let poaMagicLinkHost = "poa.bomb.app"
+    static let xDaiMagicLinkHost = "xdai.bomb.app"
+    static let goerliMagicLinkHost = "goerli.bomb.app"
+    static let artisSigma1MagicLinkHost = "artis_sigma1.bomb.app"
+    static let artisTau1MagicLinkHost = "artis_tau1.bomb.app"
+    static let binanceMagicLinkHost = "binance.bomb.app"
+    static let binanceTestMagicLinkHost = "test-binance.bomb.app"
+    static let hecoMagicLinkHost = "heco.bomb.app"
+    static let hecoTestMagicLinkHost = "test-heco.bomb.app"
+    static let customMagicLinkHost = "custom.bomb.app"
+    static let fantomMagicLinkHost = "fantom.bomb.app"
+    static let fantomTestMagicLinkHost = "test-fantom.bomb.app"
+    static let avalancheMagicLinkHost = "avalanche.bomb.app"
+    static let avalancheTestMagicLinkHost = "test-avalanche.bomb.app"
+    static let maticMagicLinkHost = "polygon.bomb.app"
+    static let mumbaiTestMagicLinkHost = "test-polygon.bomb.app"
+    static let optimisticMagicLinkHost = "optimistic.bomb.app"
+    static let cronosMagicLinkHost = "cronos.bomb.app"
+    static let cronosTestMagicLinkHost = "test-cronos.bomb.app"
+    static let arbitrumMagicLinkHost = "arbitrum.bomb.app"
+    static let palmMagicLinkHost = "palm.bomb.app"
+    static let palmTestnetMagicLinkHost = "palmTestnet.bomb.app"
+    static let klaytnCypressMagicLinkHost = "klaytnCypress.bomb.app"
+    static let klaytnBaobabTestnetMagicLinkHost = "klaytnBaobabTestnet.bomb.app"
+    static let ioTeXMagicLinkHost = "ioTeX.bomb.app"
+    static let ioTeXTestnetMagicLinkHost = "ioTeXTestnet.bomb.app"
+    static let optimismGoerliMagicLinkHost = "optimismGoerli.bomb.app"
+    static let arbitrumGoerliMagicLinkHost = "arbitrumGoerli.bomb.app"
 
     // Magic link networks
     public static let legacyMagicLinkPrefix = "https://app.awallet.io/"
@@ -95,8 +96,8 @@ public struct Constants {
 
     static let ensContractOnMainnet = AlphaWallet.Address.ethereumAddress(eip55String: "0x57f1887a8BF19b14fC0dF6Fd9B2acc9Af147eA85")
 
-    public static let defaultEnabledServers: [RPCServer] = [.main, .xDai, .polygon]
-    public static let defaultEnabledTestnetServers: [RPCServer] = [.goerli]
+    public static let defaultEnabledServers: [RPCServer] = [.bomb, .binance_smart_chain]
+    public static let defaultEnabledTestnetServers: [RPCServer] = []
 
     enum TokenScript {
         static let urlSchemeForResources = "tokenscript-resource:///"

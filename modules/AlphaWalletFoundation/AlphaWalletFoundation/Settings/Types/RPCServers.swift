@@ -28,6 +28,7 @@ public enum RPCServer: Hashable, CaseIterable {
         }
     }
     public private(set) static var customServers: [Self] = customRpcs.map { RPCServer.custom($0) }
+    case bomb
     case main
     case poa
     case classic
@@ -79,6 +80,7 @@ public enum RPCServer: Hashable, CaseIterable {
 
     public var chainID: Int {
         switch self {
+        case .bomb: return 2300
         case .main: return 1
         case .poa: return 99
         case .classic: return 61
@@ -115,6 +117,7 @@ public enum RPCServer: Hashable, CaseIterable {
 
     public var name: String {
         switch self {
+        case .bomb: return "BOMB Chain"
         case .main: return "Ethereum"
         case .poa: return "POA Network"
         case .classic: return "Ethereum Classic"
@@ -151,7 +154,7 @@ public enum RPCServer: Hashable, CaseIterable {
 
     public var isTestnet: Bool {
         switch self {
-        case .xDai, .classic, .main, .poa, .callisto, .binance_smart_chain, .artis_sigma1, .heco, .fantom, .avalanche, .polygon, .optimistic, .arbitrum, .palm, .klaytnCypress, .ioTeX, .cronosMainnet:
+        case .bomb, .xDai, .classic, .main, .poa, .callisto, .binance_smart_chain, .artis_sigma1, .heco, .fantom, .avalanche, .polygon, .optimistic, .arbitrum, .palm, .klaytnCypress, .ioTeX, .cronosMainnet:
             return false
         case .goerli, .artis_tau1, .binance_smart_chain_testnet, .heco_testnet, .fantom_testnet, .avalanche_testnet, .mumbai_testnet, .cronosTestnet, .palmTestnet, .klaytnBaobabTestnet, .ioTeXTestnet, .optimismGoerli, .arbitrumGoerli:
             return true
@@ -171,7 +174,7 @@ public enum RPCServer: Hashable, CaseIterable {
 
     private var etherscanURLForGeneralTransactionHistory: URL? {
         switch self {
-        case .main, .poa, .classic, .goerli, .xDai, .artis_sigma1, .artis_tau1, .polygon, .binance_smart_chain, .binance_smart_chain_testnet, .callisto, .optimistic, .cronosMainnet, .cronosTestnet, .custom, .arbitrum, .palm, .palmTestnet, .optimismGoerli, .arbitrumGoerli, .avalanche, .avalanche_testnet:
+        case .main, .bomb, .poa, .classic, .goerli, .xDai, .artis_sigma1, .artis_tau1, .polygon, .binance_smart_chain, .binance_smart_chain_testnet, .callisto, .optimistic, .cronosMainnet, .cronosTestnet, .custom, .arbitrum, .palm, .palmTestnet, .optimismGoerli, .arbitrumGoerli, .avalanche, .avalanche_testnet:
             return etherscanApiRoot?.appendingQueryString("module=account&action=txlist")
         case .heco: return nil
         case .heco_testnet: return nil
@@ -195,6 +198,7 @@ public enum RPCServer: Hashable, CaseIterable {
     var etherscanWebpageRoot: URL? {
         let urlString: String? = {
             switch self {
+            case .bomb: return "https://bombscan.com"
             case .main: return "https://cn.etherscan.com"
             case .goerli: return "https://goerli.etherscan.io"
             case .heco_testnet: return "https://testnet.hecoinfo.com"
@@ -232,6 +236,7 @@ public enum RPCServer: Hashable, CaseIterable {
     var etherscanApiRoot: URL? {
         let urlString: String? = {
             switch self {
+            case .bomb: return "https://bombscan.com/api"
             case .main: return "https://api-cn.etherscan.com/api"
             case .goerli: return "https://api-goerli.etherscan.io/api"
             case .classic: return "https://blockscout.com/etc/mainnet/api"
@@ -286,7 +291,7 @@ public enum RPCServer: Hashable, CaseIterable {
             return .etherscan
         case .arbitrumGoerli, .optimismGoerli:
             return .blockscout
-        case .poa, .classic, .xDai, .artis_sigma1, .artis_tau1, .mumbai_testnet, .callisto, .cronosTestnet, .palm, .palmTestnet:
+        case .poa, .bomb, .classic, .xDai, .artis_sigma1, .artis_tau1, .mumbai_testnet, .callisto, .cronosTestnet, .palm, .palmTestnet:
             return .blockscout
         case .fantom_testnet:
             return .unknown
@@ -302,7 +307,7 @@ public enum RPCServer: Hashable, CaseIterable {
         case .main, .goerli, .optimistic, .arbitrum, .optimismGoerli: return Constants.Credentials.etherscanKey
         case .binance_smart_chain: return Constants.Credentials.binanceSmartChainExplorerApiKey //Key not needed for testnet (empirically)
         case .polygon, .mumbai_testnet: return Constants.Credentials.polygonScanExplorerApiKey
-        case .fantom, .heco, .heco_testnet, .binance_smart_chain_testnet: return nil
+        case .fantom, .heco, .bomb, .heco_testnet, .binance_smart_chain_testnet: return nil
         case .klaytnCypress, .klaytnBaobabTestnet: return nil
         case .poa, .classic, .xDai, .artis_sigma1, .artis_tau1, .callisto, .fantom_testnet, .avalanche, .avalanche_testnet, .cronosTestnet, .palm, .palmTestnet, .custom, .cronosMainnet: return nil
         case .ioTeX, .ioTeXTestnet: return nil
@@ -314,7 +319,7 @@ public enum RPCServer: Hashable, CaseIterable {
     var erc20AddressForNativeToken: AlphaWallet.Address? {
         switch self {
         case .optimistic: return AlphaWallet.Address(string: "0x4200000000000000000000000000000000000006")!
-        case .main, .goerli, .fantom, .heco, .heco_testnet, .binance_smart_chain, .binance_smart_chain_testnet, .polygon, .poa, .classic, .xDai, .artis_sigma1, .artis_tau1, .mumbai_testnet, .callisto, .cronosTestnet, .fantom_testnet, .avalanche, .avalanche_testnet, .custom, .arbitrum, .palm, .palmTestnet, .optimismGoerli, .cronosMainnet: return nil
+        case .main, .goerli, .fantom, .heco, .heco_testnet, .binance_smart_chain, .binance_smart_chain_testnet, .polygon, .poa, .classic, .xDai, .artis_sigma1, .artis_tau1, .mumbai_testnet, .bomb, .callisto, .cronosTestnet, .fantom_testnet, .avalanche, .avalanche_testnet, .custom, .arbitrum, .palm, .palmTestnet, .optimismGoerli, .cronosMainnet: return nil
         case .klaytnCypress, .klaytnBaobabTestnet: return nil
         case .ioTeX, .ioTeXTestnet: return nil
         case .optimismGoerli, .arbitrumGoerli: return nil
@@ -324,7 +329,7 @@ public enum RPCServer: Hashable, CaseIterable {
     //Optimistic don't allow changing the gas price and limit
     public var canUserChangeGas: Bool {
         switch self {
-        case .main, .goerli, .fantom, .heco, .heco_testnet, .binance_smart_chain, .binance_smart_chain_testnet, .polygon, .poa, .classic, .xDai, .artis_sigma1, .artis_tau1, .mumbai_testnet, .callisto, .cronosTestnet, .fantom_testnet, .avalanche, .avalanche_testnet, .custom, .arbitrum, .palm, .palmTestnet, .optimismGoerli, .cronosMainnet: return true
+        case .main, .bomb, .goerli, .fantom, .heco, .heco_testnet, .binance_smart_chain, .binance_smart_chain_testnet, .polygon, .poa, .classic, .xDai, .artis_sigma1, .artis_tau1, .mumbai_testnet, .callisto, .cronosTestnet, .fantom_testnet, .avalanche, .avalanche_testnet, .custom, .arbitrum, .palm, .palmTestnet, .optimismGoerli, .cronosMainnet: return true
         case .optimistic, .klaytnCypress, .klaytnBaobabTestnet, .ioTeX, .ioTeXTestnet: return false
         case .optimismGoerli, .arbitrumGoerli: return false
         }
@@ -332,7 +337,7 @@ public enum RPCServer: Hashable, CaseIterable {
 
     var shouldAddBufferWhenEstimatingGasPrice: Bool {
         switch self {
-        case .main, .poa, .classic, .callisto, .xDai, .goerli, .artis_sigma1, .artis_tau1, .binance_smart_chain, .binance_smart_chain_testnet, .heco, .heco_testnet, .custom, .fantom, .fantom_testnet, .avalanche, .avalanche_testnet, .polygon, .mumbai_testnet, .optimistic, .cronosTestnet, .arbitrum, .palm, .palmTestnet, .klaytnCypress, .klaytnBaobabTestnet, .ioTeX, .ioTeXTestnet, .optimismGoerli, .arbitrumGoerli, .cronosMainnet:
+        case .main, .poa, .bomb, .classic, .callisto, .xDai, .goerli, .artis_sigma1, .artis_tau1, .binance_smart_chain, .binance_smart_chain_testnet, .heco, .heco_testnet, .custom, .fantom, .fantom_testnet, .avalanche, .avalanche_testnet, .polygon, .mumbai_testnet, .optimistic, .cronosTestnet, .arbitrum, .palm, .palmTestnet, .klaytnCypress, .klaytnBaobabTestnet, .ioTeX, .ioTeXTestnet, .optimismGoerli, .arbitrumGoerli, .cronosMainnet:
             return true
         }
     }
@@ -393,7 +398,7 @@ public enum RPCServer: Hashable, CaseIterable {
         switch self {
         case .klaytnCypress, .klaytnBaobabTestnet, .ioTeX, .ioTeXTestnet:
             return etherscanWebpageRoot?.appendingPathComponent("account").appendingPathComponent(address.eip55String)
-        case .main, .xDai, .goerli, .poa, .classic, .callisto, .artis_sigma1, .artis_tau1, .binance_smart_chain, .binance_smart_chain_testnet, .custom, .heco, .heco_testnet, .fantom, .fantom_testnet, .avalanche, .avalanche_testnet, .polygon, .mumbai_testnet, .optimistic, .cronosTestnet, .arbitrum, .palm, .palmTestnet, .optimismGoerli, .arbitrumGoerli, .cronosMainnet:
+        case .main, .xDai, .bomb, .goerli, .poa, .classic, .callisto, .artis_sigma1, .artis_tau1, .binance_smart_chain, .binance_smart_chain_testnet, .custom, .heco, .heco_testnet, .fantom, .fantom_testnet, .avalanche, .avalanche_testnet, .polygon, .mumbai_testnet, .optimistic, .cronosTestnet, .arbitrum, .palm, .palmTestnet, .optimismGoerli, .arbitrumGoerli, .cronosMainnet:
             switch etherscanCompatibleType {
             case .etherscan:
                 return etherscanWebpageRoot?.appendingPathComponent("address").appendingPathComponent(address.eip55String)
@@ -412,13 +417,14 @@ public enum RPCServer: Hashable, CaseIterable {
         switch self {
         case .main, .klaytnCypress, .klaytnBaobabTestnet, .ioTeX, .ioTeXTestnet:
             return etherscanWebpageRoot?.appendingPathComponent("token").appendingPathComponent(address.eip55String)
-        case .xDai, .goerli, .poa, .classic, .callisto, .artis_sigma1, .artis_tau1, .binance_smart_chain, .binance_smart_chain_testnet, .custom, .heco, .heco_testnet, .fantom, .fantom_testnet, .avalanche, .avalanche_testnet, .polygon, .mumbai_testnet, .optimistic, .cronosTestnet, .arbitrum, .palm, .palmTestnet, .optimismGoerli, .arbitrumGoerli, .cronosMainnet:
+        case .xDai, .goerli, .bomb, .poa, .classic, .callisto, .artis_sigma1, .artis_tau1, .binance_smart_chain, .binance_smart_chain_testnet, .custom, .heco, .heco_testnet, .fantom, .fantom_testnet, .avalanche, .avalanche_testnet, .polygon, .mumbai_testnet, .optimistic, .cronosTestnet, .arbitrum, .palm, .palmTestnet, .optimismGoerli, .arbitrumGoerli, .cronosMainnet:
             return etherscanContractDetailsWebPageURL(for: address)
         }
     }
 
     public var symbol: String {
         switch self {
+        case .bomb: return "BOMB"
         case .main: return "ETH"
         case .classic: return "ETC"
         case .callisto: return "CLO"
@@ -447,6 +453,7 @@ public enum RPCServer: Hashable, CaseIterable {
 
     public var cryptoCurrencyName: String {
         switch self {
+        case .bomb: return "BOMB"
         case .main, .classic, .callisto, .poa, .goerli, .optimistic: return "Ether"
         case .xDai: return "xDai"
         case .binance_smart_chain, .binance_smart_chain_testnet: return "BNB"
@@ -479,6 +486,7 @@ public enum RPCServer: Hashable, CaseIterable {
 
     public var magicLinkHost: String {
         switch self {
+        case .bomb: return Constants.bombMagicLinkHost
         case .main: return Constants.mainnetMagicLinkHost
         case .poa: return Constants.poaMagicLinkHost
         case .classic: return Constants.classicMagicLinkHost
@@ -516,6 +524,7 @@ public enum RPCServer: Hashable, CaseIterable {
     public var rpcURL: URL {
         let urlString: String = {
             switch self {
+            case .bomb: return "https://rpc.bombchain.com"
             case .main: return "https://mainnet.infura.io/v3/\(Constants.Credentials.infuraKey)"
             case .classic: return "https://www.ethercluster.com/etc"
             case .callisto: return "https://explorer.callisto.network/api/eth-rpc"
@@ -582,7 +591,7 @@ public enum RPCServer: Hashable, CaseIterable {
 
     var transactionInfoEndpoints: URL? {
         switch self {
-        case .main, .goerli, .classic, .poa, .xDai, .artis_sigma1, .artis_tau1, .binance_smart_chain, .binance_smart_chain_testnet, .fantom, .polygon, .mumbai_testnet, .heco, .heco_testnet, .callisto, .optimistic, .cronosTestnet, .custom, .arbitrum, .palm, .palmTestnet, .klaytnCypress, .klaytnBaobabTestnet, .ioTeX, .ioTeXTestnet, .optimismGoerli, .optimismGoerli, .arbitrumGoerli, .cronosMainnet, .avalanche, .avalanche_testnet:
+        case .main, .bomb, .goerli, .classic, .poa, .xDai, .artis_sigma1, .artis_tau1, .binance_smart_chain, .binance_smart_chain_testnet, .fantom, .polygon, .mumbai_testnet, .heco, .heco_testnet, .callisto, .optimistic, .cronosTestnet, .custom, .arbitrum, .palm, .palmTestnet, .klaytnCypress, .klaytnBaobabTestnet, .ioTeX, .ioTeXTestnet, .optimismGoerli, .optimismGoerli, .arbitrumGoerli, .cronosMainnet, .avalanche, .avalanche_testnet:
             return etherscanApiRoot
         case .fantom_testnet: return URL(string: "https://explorer.testnet.fantom.network/tx/")
         }
@@ -590,14 +599,14 @@ public enum RPCServer: Hashable, CaseIterable {
 
     var networkRequestsQueuePriority: Operation.QueuePriority {
         switch self {
-        case .main, .polygon, .klaytnCypress, .klaytnBaobabTestnet: return .normal
+        case .main, .bomb, .polygon, .klaytnCypress, .klaytnBaobabTestnet: return .normal
         case .xDai, .poa, .classic, .callisto, .goerli, .artis_sigma1, .artis_tau1, .binance_smart_chain, .binance_smart_chain_testnet, .custom, .heco, .heco_testnet, .fantom, .fantom_testnet, .avalanche, .avalanche_testnet, .mumbai_testnet, .optimistic, .cronosTestnet, .arbitrum, .palm, .palmTestnet, .ioTeX, .ioTeXTestnet, .optimismGoerli, .arbitrumGoerli, .cronosMainnet: return .low
         }
     }
 
     var transactionProviderType: SingleChainTransactionProvider.Type {
         switch self {
-        case .main, .classic, .callisto, .custom, .poa, .goerli, .xDai, .artis_sigma1, .binance_smart_chain, .binance_smart_chain_testnet, .artis_tau1, .heco, .heco_testnet, .fantom, .fantom_testnet, .avalanche, .avalanche_testnet, .polygon, .mumbai_testnet, .optimistic, .cronosTestnet, .arbitrum, .palm, .palmTestnet, .optimismGoerli, .arbitrumGoerli, .cronosMainnet:
+        case .main, .bomb, .classic, .callisto, .custom, .poa, .goerli, .xDai, .artis_sigma1, .binance_smart_chain, .binance_smart_chain_testnet, .artis_tau1, .heco, .heco_testnet, .fantom, .fantom_testnet, .avalanche, .avalanche_testnet, .polygon, .mumbai_testnet, .optimistic, .cronosTestnet, .arbitrum, .palm, .palmTestnet, .optimismGoerli, .arbitrumGoerli, .cronosMainnet:
             return EtherscanSingleChainTransactionProvider.self
         case .klaytnCypress, .klaytnBaobabTestnet:
             return CovalentSingleChainTransactionProvider.self
@@ -622,7 +631,7 @@ public enum RPCServer: Hashable, CaseIterable {
         var server: RPCServer?
         //Special case to support legacy host name
         if magicLinkHost == Constants.legacyMagicLinkHost {
-            server = .main
+            server = .bomb
         } else {
             server = Self.availableServers.first { $0.magicLinkHost == magicLinkHost }
         }
@@ -639,6 +648,7 @@ public enum RPCServer: Hashable, CaseIterable {
     //Cannot be `let` as the chains can change dynamically without the app being restarted (i.e. killed). The UI can be restarted though (when switching changes)
     static public var allCases: [RPCServer] {
         return [
+            .bomb,
             .main,
             .poa,
             .classic,
@@ -691,7 +701,7 @@ public enum RPCServer: Hashable, CaseIterable {
 
     var maximumBlockRangeForEvents: UInt64? {
         switch self {
-        case .binance_smart_chain, .binance_smart_chain_testnet, .heco, .heco_testnet:
+        case .binance_smart_chain, .binance_smart_chain_testnet, .bomb, .heco, .heco_testnet:
             //These do not allow range more than 5000
             return 4990
         case .optimistic:
@@ -723,11 +733,12 @@ public enum RPCServer: Hashable, CaseIterable {
 
     public var displayOrderPriority: Int {
         switch self {
-        case .main: return 1
-        case .xDai: return 2
-        case .classic: return 3
-        case .poa: return 4
-        case .callisto: return 9
+        case .bomb: return 1
+        case .main: return 2
+        case .xDai: return 3
+        case .classic: return 4
+        case .poa: return 5
+        case .callisto: return 6
         case .goerli: return 10
         case .artis_sigma1: return 246529
         case .artis_tau1: return 246785
@@ -761,6 +772,7 @@ public enum RPCServer: Hashable, CaseIterable {
         switch self {
         case .main, .goerli, .optimismGoerli, .arbitrumGoerli: return "Etherscan"
         case .classic, .poa, .custom, .callisto, .binance_smart_chain, .binance_smart_chain_testnet, .heco, .heco_testnet, .fantom, .fantom_testnet, .avalanche, .avalanche_testnet, .polygon, .mumbai_testnet, .optimistic, .arbitrum, .palm, .palmTestnet, .klaytnCypress, .klaytnBaobabTestnet, .ioTeX, .ioTeXTestnet, .optimismGoerli: return "\(name) Explorer"
+        case .bomb: return "BOMBScan"
         case .xDai: return "Blockscout"
         case .artis_sigma1, .artis_tau1: return "ARTIS"
         case .cronosMainnet, .cronosTestnet: return "Cronoscan"
@@ -778,7 +790,7 @@ public enum RPCServer: Hashable, CaseIterable {
         case .arbitrum: return .arbitrum
         case .klaytnCypress: return .klaytnCypress
         case .klaytnBaobabTestnet: return .klaytnBaobabTestnet
-        case .main, .goerli, .artis_sigma1, .artis_tau1, .custom, .poa, .callisto, .xDai, .classic, .binance_smart_chain_testnet, .heco_testnet, .fantom, .fantom_testnet, .avalanche, .avalanche_testnet, .mumbai_testnet, .optimistic, .cronosTestnet, .palm, .palmTestnet, .ioTeX, .ioTeXTestnet, .optimismGoerli, .arbitrumGoerli, .cronosMainnet: return nil
+        case .main, .bomb, .goerli, .artis_sigma1, .artis_tau1, .custom, .poa, .callisto, .xDai, .classic, .binance_smart_chain_testnet, .heco_testnet, .fantom, .fantom_testnet, .avalanche, .avalanche_testnet, .mumbai_testnet, .optimistic, .cronosTestnet, .palm, .palmTestnet, .ioTeX, .ioTeXTestnet, .optimismGoerli, .arbitrumGoerli, .cronosMainnet: return nil
         }
     }
 
@@ -787,7 +799,7 @@ public enum RPCServer: Hashable, CaseIterable {
         case .main: return "ethereum"
         case .classic: return "ethereum-classic"
         case .xDai: return "xdai"
-        case .binance_smart_chain: return "binance-smart-chain"
+        case .binance_smart_chain, .bomb: return "binance-smart-chain"
         case .avalanche: return "avalanche"
         case .polygon: return "polygon-pos"
         case .fantom: return "fantom"
@@ -801,14 +813,14 @@ public enum RPCServer: Hashable, CaseIterable {
     var coinbasePlatform: String? {
         switch self {
         case .main: return "ethereum"
-        case .avalanche, .xDai, .classic, .fantom, .arbitrum, .polygon, .binance_smart_chain, .klaytnCypress, .klaytnBaobabTestnet, .poa, .callisto, .goerli, .artis_sigma1, .artis_tau1, .binance_smart_chain_testnet, .heco, .heco_testnet, .fantom_testnet, .avalanche_testnet, .mumbai_testnet, .custom, .optimistic, .cronosTestnet, .palm, .palmTestnet, .ioTeX, .ioTeXTestnet, .optimismGoerli, .arbitrumGoerli, .cronosMainnet: return nil
+        case .avalanche, .xDai, .classic, .fantom, .arbitrum, .polygon, .binance_smart_chain, .klaytnCypress, .bomb, .klaytnBaobabTestnet, .poa, .callisto, .goerli, .artis_sigma1, .artis_tau1, .binance_smart_chain_testnet, .heco, .heco_testnet, .fantom_testnet, .avalanche_testnet, .mumbai_testnet, .custom, .optimistic, .cronosTestnet, .palm, .palmTestnet, .ioTeX, .ioTeXTestnet, .optimismGoerli, .arbitrumGoerli, .cronosMainnet: return nil
         }
     }
 
     var shouldExcludeZeroGasPrice: Bool {
         switch self {
         case .klaytnCypress, .klaytnBaobabTestnet: return true
-        case .binance_smart_chain, .binance_smart_chain_testnet, .heco, .heco_testnet, .optimistic, .polygon, .mumbai_testnet, .cronosTestnet, .arbitrum, .main, .poa, .classic, .callisto, .goerli, .artis_sigma1, .artis_tau1, .fantom, .fantom_testnet, .avalanche, .avalanche_testnet, .custom, .palm, .palmTestnet, .ioTeX, .ioTeXTestnet, .xDai, .optimismGoerli, .arbitrumGoerli, .cronosMainnet: return false
+        case .binance_smart_chain, .bomb, .binance_smart_chain_testnet, .heco, .heco_testnet, .optimistic, .polygon, .mumbai_testnet, .cronosTestnet, .arbitrum, .main, .poa, .classic, .callisto, .goerli, .artis_sigma1, .artis_tau1, .fantom, .fantom_testnet, .avalanche, .avalanche_testnet, .custom, .palm, .palmTestnet, .ioTeX, .ioTeXTestnet, .xDai, .optimismGoerli, .arbitrumGoerli, .cronosMainnet: return false
         }
     }
 
@@ -817,7 +829,7 @@ public enum RPCServer: Hashable, CaseIterable {
         case .klaytnCypress, .klaytnBaobabTestnet: return .noBatching
         case .xDai: return .batch(6)
         case .cronosMainnet: return .batch(5)
-        case .binance_smart_chain, .binance_smart_chain_testnet, .heco, .heco_testnet, .optimistic, .polygon, .mumbai_testnet, .cronosTestnet, .arbitrum, .main, .poa, .classic, .callisto, .goerli, .artis_sigma1, .artis_tau1, .fantom, .fantom_testnet, .avalanche, .avalanche_testnet, .custom, .palm, .palmTestnet, .ioTeX, .ioTeXTestnet, .optimismGoerli, .arbitrumGoerli: return .batch(32)
+        case .binance_smart_chain, .bomb, .binance_smart_chain_testnet, .heco, .heco_testnet, .optimistic, .polygon, .mumbai_testnet, .cronosTestnet, .arbitrum, .main, .poa, .classic, .callisto, .goerli, .artis_sigma1, .artis_tau1, .fantom, .fantom_testnet, .avalanche, .avalanche_testnet, .custom, .palm, .palmTestnet, .ioTeX, .ioTeXTestnet, .optimismGoerli, .arbitrumGoerli: return .batch(32)
         }
     }
 

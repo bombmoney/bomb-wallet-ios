@@ -19,6 +19,7 @@ extension RPCServer {
 
     var blockChainName: String {
         switch self {
+        case .bomb: return "BOMB Chain"
         case .xDai: return R.string.localizable.blockchainXDAI()
         case .artis_sigma1: return R.string.localizable.blockchainARTISSigma1()
         case .artis_tau1: return R.string.localizable.blockchainARTISTau1()
@@ -51,6 +52,7 @@ extension RPCServer {
 
     var iconImage: UIImage? {
         switch self {
+        case .bomb: return nil // SIMON FIX PLEASE
         case .main: return R.image.eth()
         case .xDai: return R.image.xDai()
         case .poa: return R.image.tokenPoa()
@@ -80,6 +82,7 @@ extension RPCServer {
 
     var blockChainNameColor: UIColor {
         switch self {
+        case .bomb: return .red
         case .main: return .init(red: 41, green: 134, blue: 175)
         case .classic: return .init(red: 55, green: 137, blue: 55)
         case .callisto: return .init(red: 88, green: 56, blue: 163)
@@ -113,6 +116,7 @@ extension RPCServer {
 
     var staticOverlayIcon: UIImage? {
         switch self {
+        case .bomb: return nil
         case .main: return R.image.iconsNetworkEth()
         case .xDai: return R.image.iconsNetworkXdai()
         case .poa: return R.image.iconsNetworkPoa()
