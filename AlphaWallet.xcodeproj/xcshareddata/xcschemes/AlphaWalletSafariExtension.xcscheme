@@ -30,7 +30,7 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "2912CCF41F6A830700C6CBE3"
-               BuildableName = "AlphaWallet.app"
+               BuildableName = "BOMB.app"
                BlueprintName = "AlphaWallet"
                ReferencedContainer = "container:AlphaWallet.xcodeproj">
             </BuildableReference>
@@ -62,7 +62,7 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "2912CCF41F6A830700C6CBE3"
-            BuildableName = "AlphaWallet.app"
+            BuildableName = "BOMB.app"
             BlueprintName = "AlphaWallet"
             ReferencedContainer = "container:AlphaWallet.xcodeproj">
          </BuildableReference>
@@ -81,7 +81,7 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "2912CCF41F6A830700C6CBE3"
-            BuildableName = "AlphaWallet.app"
+            BuildableName = "BOMB.app"
             BlueprintName = "AlphaWallet"
             ReferencedContainer = "container:AlphaWallet.xcodeproj">
          </BuildableReference>
